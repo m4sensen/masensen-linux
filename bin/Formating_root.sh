@@ -17,14 +17,15 @@ umount /mnt
 #
 mount -o subvol=@,rw,noatime,autodefrag,ssd,compress=zstd /dev/mapper/vg0-root /mnt
 #
-mkdir /mnt/home
-mkdir /mnt/.snapshots
-mkdir /mnt/vms
-mkdir /mnt/var
-mkdir /mnt/var/log
-mkdir /mnt/var/cache
-mkdir /mnt/var/lib/pacman
-mkdir /mnt/tmp
+mkdir -p /mnt/home
+mkdir -p /mnt/.snapshots
+mkdir -p /mnt/vms
+mkdir -p /mnt/var
+mkdir -p /mnt/var/log
+mkdir -p /mnt/var/cache
+mkdir -p /mnt/var/lib/pacman
+mkdir -p /mnt/tmp
+
 #
 mount -o subvol=@home,rw,noatime,autodefrag,ssd,compress=zstd /dev/mapper/vg0-root /mnt/home
 
@@ -43,7 +44,7 @@ mount -o subvol=@pkg,rw,noatime,autodefrag,ssd,compress=zstd /dev/mapper/vg0-roo
 mount -o subvol=@tmp,rw,noatime,autodefrag,ssd,compress=zstd /dev/mapper/vg0-root /mnt/tmp
 #
 mkdir -p mnt/boot
-mount /dev/sda1 mnt/boot
+mount /dev/${DISK}1 mnt/boot
 
 
 sleep 10
