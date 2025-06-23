@@ -44,3 +44,6 @@ mount -o subvol=@tmp,rw,noatime,autodefrag,ssd,compress=zstd /dev/mapper/vg0-roo
 #
 mkdir -p mnt/boot
 mount /dev/sda1 mnt/boot
+
+
+sleep 10
