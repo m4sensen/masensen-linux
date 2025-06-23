@@ -1,0 +1,1 @@
+mkfs.fat -F32 ${DISK}1

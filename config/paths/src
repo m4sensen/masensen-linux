@@ -1,0 +1,52 @@
+# === Loading functions ==== #
+
+if [ -f "$(dirname "$0")/functions/log.sh" ]; then
+  source "$(dirname "$0")/functions/log.sh"
+else
+  echo "Missing: $(dirname "$0")/functions/log.sh"
+  echo "Exiting CodexBox..."
+  sleep 10
+  exit 1
+fi
+
+if [ -f "$(dirname "$0")/functions/optional_file.sh" ]; then
+  source "$(dirname "$0")/functions/optional_file.sh"
+else
+  echo "Missing: $(dirname "$0")/functions/optional_file.sh"
+  
+  echo "Exiting CodexBox..."
+  sleep 10
+  exit 1
+fi
+
+if [ -f "$(dirname "$0")/functions/require_file.sh" ]; then
+  source "$(dirname "$0")/functions/require_file.sh"
+else
+  echo "Missing: $(dirname "$0")/functions/require_file.sh"
+  echo "Exiting CodexBox..."
+  sleep 10
+  exit 1
+fi
+
+if [ -f "$(dirname "$0")/functions/setup_editor.sh" ]; then
+  source "$(dirname "$0")/functions/setup_editor.sh"
+else
+  echo "Missing: $(dirname "$0")/functions/setup_editor.sh"
+  echo "Exiting CodexBox..."
+  sleep 10
+  exit 1
+fi
+
+
+#
+
+
+
+
+
+
+require_file "$(dirname "$0")/bin/Partitioninig_the_disk.sh"
+require_file "$(dirname "$0")/bin/bin/Formating_boot_partition.sh"
+require_file "$(dirname "$0")/bin/Formating_Linux_system_partition.sh"
+require_file "$(dirname "$0")/bin/Formating_root.sh"
+
