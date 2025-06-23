@@ -2,6 +2,10 @@ pacman -S grub efibootmgr
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
+cat blkid -s UUID -o value ${DISK}2
+
+sleep 10
+
 blkid -s UUID -o value ${DISK}2 >> /etc/default/grub
 
 echo "Uncomment : GRUB_ENABLE_CRYPTODISK=y"
