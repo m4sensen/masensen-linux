@@ -43,10 +43,14 @@ fi
 
 
 
-
-
 require_file "$(dirname "$0")/bin/Partitioninig_the_disk.sh"
-require_file "$(dirname "$0")/bin/bin/Formating_boot_partition.sh"
+require_file "$(dirname "$0")/bin/Formating_boot_partition.sh"
 require_file "$(dirname "$0")/bin/Formating_Linux_system_partition.sh"
 require_file "$(dirname "$0")/bin/Formating_root.sh"
-
+require_file "$(dirname "$0")/bin/Making_swap.sh"
+require_file "$(dirname "$0")/bin/Base_system_setup.sh"
+require_file "$(dirname "$0")/bin/Configure_bootloader.sh"
+require_file "$(dirname "$0")/bin/Setup_users.sh"
+require_file "$(dirname "$0")/bin/Setup_network.sh"
+require_file "$(dirname "$0")/bin/Setup_window_managers.sh"
+require_file "$(dirname "$0")/bin/Optional_package.sh"

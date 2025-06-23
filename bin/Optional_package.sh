@@ -1,0 +1,1 @@
+pacman -S sudo timeshift htop vim

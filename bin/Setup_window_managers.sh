@@ -1,0 +1,1 @@
+pacman -S xorg gnome gnome-tweaks gdm
