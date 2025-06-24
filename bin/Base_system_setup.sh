@@ -20,6 +20,10 @@ pacman -Syy lvm2
 echo "add btrfs lvm2 resume"
 sleep 10
 
+echo "add encrypt btrfs lvm2 resume"
+
+sleep 10
+
 nano /etc/mkinitcpio.conf
 
 mkinitcpio -P
