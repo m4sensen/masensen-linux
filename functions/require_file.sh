@@ -5,7 +5,7 @@ require_file() {
   if [ -f "$file" ]; then
     source "$file"
   else
-    echo "❌ $description not found: $file"
+    echo "$description not found: $file"
     echo "Exiting CodexBox..."
     sleep 10
     exit 1

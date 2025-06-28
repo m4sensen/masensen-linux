@@ -1,0 +1,9 @@
+RESET="\e[0m"               #Reset all styles
+BOLD="\e[1m"	            #Bold or increased intensity
+DIM="\e[2m"                 #Faint color (low intensity)
+ITALIC="\e[3m"	            #Italic text
+UNDERLINE="\e[4m"	        #Underlined text
+BLINK="\e[5m"	            #Blinking text (very rare)
+INVERSE="\e[7m"	            #Swap foreground/background
+HIDDEN="\e[8m"	            #Hidden/invisible text
+STRIKETHROUGH="\e[9m"		#Crossed-out text

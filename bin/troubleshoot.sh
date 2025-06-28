@@ -5,9 +5,7 @@ vgchange -ay
 mkdir -p /mnt/{home,.snapshots,vms,var,tmp,boot}
 mkdir -p /mnt/var/{log,cache,lib/pacman}
 
-#
 mount -o subvol=@,rw,noatime,autodefrag,ssd,compress=zstd /dev/mapper/vg0-root /mnt
-#
 
 mkdir -p /mnt/{home,.snapshots,vms,var,tmp,boot}
 
@@ -24,17 +22,9 @@ mount -o subvol=@log,rw,noatime,autodefrag,ssd,compress=zstd /dev/mapper/vg0-roo
 mount -o subvol=@cache,rw,noatime,autodefrag,ssd,compress=zstd /dev/mapper/vg0-root /mnt/var/cache
 mount -o subvol=@pkg,rw,noatime,autodefrag,ssd,compress=zstd /dev/mapper/vg0-root /mnt/var/lib/pacman
 
-#
 mount ${DISK}1 /mnt/boot
 
-
-##
-
 swapon /dev/mapper/vg0-swap
-
-
-
-##
 
 mount --bind /dev /mnt/dev
 mount --bind /proc /mnt/proc
@@ -42,7 +32,5 @@ mount --bind /sys /mnt/sys
 mount --bind /run /mnt/run
 
 mount --bind /sys/firmware/efi/efivars /mnt/sys/firmware/efi/efivars #on efi
-
-
 
 arch-chroot /mnt

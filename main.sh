@@ -1,45 +1,64 @@
-#!/bin/bash
+frameworkName="codexBash"
+echo -e "\e[1;38;2;125;211;252mStarting $frameworkName framework © Masensen\e[0m"
 
-lsblk
+echo "Defining the project directory, codex-bash.cfg, init.sh"
+projectDir="$(dirname "${0}")"
+codexBashCfgFile="$projectDir/codexBash.cfg"
+codexBashInitFile="$projectDir/config/codexBash_init.sh"
+codexBash_colors=(RED_500 SKY_400 EMERALD_600)
 
-read -rp "Enter disk device (e.g., /dev/sda): " DISK
-if [ ! -b "$DISK" ]; then
-    echo "Error: $DISK is not a valid block device."
-    exit 1
-fi
+# === Declaring parent functions === #
 
-# Get total disk size in bytes
-DISK_SIZE_BYTES=$(blockdev --getsize64 "$DISK")
-DISK_SIZE_GB=$((DISK_SIZE_BYTES / 1024 / 1024 / 1024))
+import_required_colors_parent() {
+  local COLOR_FILE="$(dirname "$0")/accessories/colors.sh"
+  for varname in "$@"; do
+    line=$(grep -E "^${varname}=" "$COLOR_FILE")
+    if [[ -n "$line" ]]; then
+      eval "$line"
+    else
+      echo "⚠️  Color '${varname}' not found in $COLOR_FILE" >&2
+    fi
+  done
+  # Always include RESET
+  eval "$(grep -E '^RESET=' "$COLOR_FILE")"
+}
 
-echo "Disk size: ${DISK_SIZE_GB}G"
+require_file_parent() {
+  local file="$1"
+  local description="${2:-Required file}"
 
-# Prompt for EFI size
-read -rp "Enter EFI partition size (e.g., 1G): " EFI_PART_SIZE
-EFI_PART_SIZE=${EFI_PART_SIZE:-1G}
-
-# Prompt for LVM size with % support
-read -rp "Enter LVM partition size (e.g., 150G or 60%): " LVM_PART_INPUT
-
-if [[ "$LVM_PART_INPUT" =~ ^([0-9]{1,3})%$ ]]; then
-    # Extract percentage and compute size
-    PERCENT=${BASH_REMATCH[1]}
-    LVM_PART_SIZE_GB=$(echo "($DISK_SIZE_GB * $PERCENT + 99) / 100")
-    LVM_PART_SIZE="${LVM_PART_SIZE_GB}"
-else
-    LVM_PART_SIZE="$LVM_PART_INPUT"
-fi
-
-echo "Final values:"
-echo "DISK = $DISK"
-echo "EFI_PART_SIZE = $EFI_PART_SIZE"
-echo "LVM_PART_SIZE = $LVM_PART_SIZE"
-
- if [ -f "$(dirname "$0")/config/paths/src" ]; then
-    source "$(dirname "$0")/config/paths/src"
+  if [ -f "$file" ]; then
+    source "$file"
   else
+    echo "$description not found: $file"
     echo "Exiting CodexBox..."
     sleep 10
     exit 1
   fi
+}
 
+require_file_parent "$(dirname "$0")/accessories/emojis.sh"
+require_file_parent "$(dirname "$0")/accessories/fontStyle.sh"
+import_required_colors_parent "${codexBash_colors[@]}"
+
+require_file_parent "$(dirname "$0")/functions/require_file.sh"
+require_file_parent "$(dirname "$0")/functions/log.sh"
+
+# === End === #
+
+echo "Loading codex-bash.cfg"
+require_file_parent $codexBashCfgFile
+
+echo "$frameworkName initialization ..."
+
+echo "Loading codexBash_init.sh"
+require_file_parent $codexBashInitFile
+
+echo "Starting $project_name"
+echo -e "\e[1;38;5;117mStarting $project_name installer © Masensen\e[0m"
+
+echo "Defining project_init.sh"
+projectInitFile="$projectDir/config/project_init.sh"
+
+echo "Loading project_init.sh"
+require_file_parent $codexBashInitFile
